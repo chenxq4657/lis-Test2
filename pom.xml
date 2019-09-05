@@ -58,6 +58,7 @@
         <filters>
             <filter>src/main/resources/${profile.active}/datasource.properties</filter>
             <filter>src/main/resources/${profile.active}/log4j2.properties</filter>
+            <filter>src/main/resources/${profile.active}/server.properties</filter>
         </filters>
         <resources>
             <!-- Filter jdbc.properties & mail.properties. NOTE: We don't filter applicationContext-infrastructure.xml,
@@ -68,10 +69,13 @@
                 <excludes>
                     <exclude>dev/datasource.properties</exclude>
                     <exclude>dev/log4j2.properties</exclude>
+                    <exclude>dev/server.properties</exclude>
                     <exclude>test/datasource.properties</exclude>
                     <exclude>test/log4j2.properties</exclude>
+                    <exclude>test/server.properties</exclude>
                     <exclude>prod/datasource.properties</exclude>
                     <exclude>prod/log4j2.properties</exclude>
+                    <exclude>prod/server.properties</exclude>
                 </excludes>
             </resource>
         </resources>
@@ -116,33 +120,9 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-            <version>8.0.36</version>
-            <!--生命周期：
-            *compile，缺省值，适用于所有阶段，会随着项目一起发布。
-            * provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar。
-            * runtime，只在运行时使用，如JDBC驱动，适用运行和测试阶段。
-            * test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。
-            * system，类似provided，需要显式提供包含依赖的jar，Maven不会在Repository中查找它-->
-            <scope>provided</scope>
         </dependency>
 
         <!--mysql连接jar-->
@@ -183,6 +163,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
+
+        <!--热部署 与drools冲突，所以注掉，使用idea的JRebel插件进行热部署-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>-->
 
         <!--drools规则引擎-->
         <dependency>
