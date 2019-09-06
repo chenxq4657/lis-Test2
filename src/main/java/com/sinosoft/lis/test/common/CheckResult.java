@@ -13,8 +13,6 @@ public class CheckResult {
      */
     private boolean checkFlag = true;
 
-    private String succMsg = "校验通过";
-
-    private String errorMsg = "";
+    private String msg = "校验通过";
 
 }

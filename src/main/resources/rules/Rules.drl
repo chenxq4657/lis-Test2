@@ -1,22 +1,22 @@
 package com.rules
 
 import com.sinosoft.lis.test.common.CheckResult;
-import com.sinosoft.lis.test.entity.UserRole;
+import com.sinosoft.lis.test.entity.UserInfo;
 
 rule "111"
     no-loop true //定义当前的规则是否不允许多次循环执行,默认是 false,也就是当前的规则只要满足条件,可以无限次执行。
     lock-on-active true //将lock-on-active属性的值设置为true,可避免因某些Fact对象被修改(update)后而使已经执行过的规则再次被激活执行
     salience 1 //用来设置规则执行的优先级,salience 属性的值是一个数字,数字越大执行优先级越高, 同时它的值可以是一个负数。默认情况下,规则的 salience 默认值为 0。
     when
-        userrole : UserRole(id == null)
+        userinfo : UserInfo(userCode == null)
         checkResult:CheckResult()
     then
-        userrole.setUserId(null);
+        userinfo.setUserCode(null);
         checkResult.setCheckFlag(false);
-        checkResult.setErrorMsg(checkResult.getErrorMsg()+"id不能为空111；");
+        checkResult.setMsg(checkResult.getMsg()+"id不能为空111；");
         System.out.println("规则1");
         //将修改后的值更新到drools的内存中
-        update(userrole);
+        update(userinfo);
 end
 
 rule "222"
@@ -25,10 +25,10 @@ rule "222"
     salience 3
 
     when
-        userrole : UserRole(userId == null)
+        userinfo : UserInfo(userCode == null)
         checkResult:CheckResult()
     then
         checkResult.setCheckFlag(false);
-        checkResult.setErrorMsg(checkResult.getErrorMsg()+"userid不能为空222；");
+        checkResult.setMsg(checkResult.getMsg()+"userid不能为空222；");
         System.out.println("规则2");
 end
