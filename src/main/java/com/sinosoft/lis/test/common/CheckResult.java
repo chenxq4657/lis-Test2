@@ -8,7 +8,10 @@ import lombok.Data;
 @Data
 public class CheckResult {
 
-    private boolean checkFlag = true;// true:通过校验；false：未通过校验
+    /**
+     * true:通过校验；false：未通过校验
+     */
+    private boolean checkFlag = true;
 
     private String succMsg = "校验通过";
 

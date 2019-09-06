@@ -6,12 +6,12 @@ import lombok.Setter;
 /**
  * Created by cxq on 2019/8/23.
  */
-public class Msg {
+public class Msg<T> {
     private String message;
     private String flag;
     @Setter
     @Getter
-    private Object data;
+    private T data;
 
     private Msg(){}
 
